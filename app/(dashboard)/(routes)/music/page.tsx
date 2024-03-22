@@ -15,11 +15,13 @@ import { useState } from "react";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 
 
 const MusicPage = () => {
 
+  const proModal = useProModal();
   const router = useRouter();
   const [music, setMusic] = useState<string>();
 
@@ -40,11 +42,11 @@ const MusicPage = () => {
       form.reset();
 
     } catch (error: any) {
-      // if (error?.response?.status === 403) {
-      //   // proModal.onOpen();
-      // } else {
-      //   // toast.error("Something went wrong.");
-      // }
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      } else {
+        // toast.error("Something went wrong.");
+      }
       console.log(error)
     } finally {
       router.refresh();

@@ -15,7 +15,7 @@ export const increaseApiLimit = async()=>{
     return;
   }
   try {
-    let users = await userLimit.find( userIdd: userId );
+    let users = await userLimit.findOne({ userId });
     console.log("finding the user");
     if(users){
       console.log("user found in DB");
@@ -26,7 +26,7 @@ export const increaseApiLimit = async()=>{
     else{
       console.log("user was not found in DB, will have to create a new instance");
       const newuser = new userLimit({
-        userIdd: userId,
+        userId: userId,
         numtrials: 1
       });
       console.log(newuser);
@@ -45,8 +45,8 @@ export const checkApiLimit = async()=>{
     return false;
   }
   try {
-    let users = await userLimit.find( userIdd: userId );
-    console.log("finding the user");
+    let users = await userLimit.findOne({ userId });
+    console.log("finding the user in checkApiLimit");
     if(!users || users.numtrials<MAX_FREE_COUNTS){
       return true;
     }
@@ -54,8 +54,27 @@ export const checkApiLimit = async()=>{
       return false;
     }
   } catch (error) {
+    console.log("error in task checkApiLimit");
+    console.log(error);
+  } 
+}
+
+export const getApiLimit = async()=>{
+  const { userId } = auth();
+  if(!userId){
+    return 0;
+  }
+  try {
+    let users = await userLimit.findOne({ userId });
+    console.log("finding the user in getApiLimit");
+    if(!users){
+      console.log("user was not there in DB");
+      return 0;
+    }
+    console.log("user was there in DB");
+    return users.numtrials;
+  } catch (error) {
     console.log("error in task increaseApiLimit");
     console.log(error);
   } 
-
 }
