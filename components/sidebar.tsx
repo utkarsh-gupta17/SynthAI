@@ -35,7 +35,7 @@ const routes = [
     color: "text-orange-700",
   },
   {
-    label: "Video Generation",
+    label: "Music Generation",
     icon: MusicIcon,
     href: "/music",
     color: "text-emerald-500",
@@ -69,7 +69,7 @@ const Sidebar = () => {
         <div className="space-y-1">
           {
             routes.map((route)=>(
-              <Link href={route.href} key={route.href} className={cn("text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition",pathname===route.href?"text-white bg-white/10":"text-zinc-400")}>
+              <Link href={route.href} key={route.href} className={cn("text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition",pathname===route.href?"text-white bg-white/5":"text-zinc-400")}>
                 <div className="flex items-center flex-1">
                   <route.icon className={cn("h-5 w-5 mr-3",route.color)}/>
                   {route.label}
