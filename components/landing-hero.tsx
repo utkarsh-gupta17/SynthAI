@@ -41,6 +41,14 @@ export const LandingHero = () => {
       <div className="text-zinc-200 text-xs md:text-sm font-normal">
         No credit card required.
       </div>
+      <span className="block text-sm sm:text-center text-zinc-200">
+          ©2024{" "}SynthAi
+          . Made with ❤️ using NextJS by <span className="font-semibold">
+            <a target="_blank" href="https://github.com/utkarsh-gupta17">
+            @UtkarshGupta
+            </a>
+            </span>.
+        </span>
     </div>
   );
 };
