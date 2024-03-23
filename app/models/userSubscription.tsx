@@ -1,6 +1,6 @@
 // user model data
 import mongoose from 'mongoose';
-interface IUserS extends Document {
+interface IUserS extends mongoose.Document {
   userId: string;
   stripeCustomerId: string;
   stripeSubscriptionId: string;
@@ -30,4 +30,5 @@ const userSubscriptionSchema = new mongoose.Schema<IUserS>({
 },
   { timestamps: true }
 );
-export const userSub: mongoose.Model<IUserS> = mongoose.models["userSubscription"]? mongoose.model("userSubscription"): mongoose.model("userSubscription", userSubscriptionSchema);
+export const userSub = mongoose.models['userSubscription'] || mongoose.model<IUserS>('userSubscription', userSubscriptionSchema);
+// export const : mongoose.Model<IUserS> = mongoose.models["userSubscription"]? mongoose.model("userSubscription"): mongoose.model("userSubscription", userSubscriptionSchema);

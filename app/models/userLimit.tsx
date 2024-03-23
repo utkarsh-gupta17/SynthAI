@@ -1,6 +1,6 @@
 // user model data
 import mongoose from 'mongoose';
-interface IUser extends Document {
+interface IUser extends mongoose.Document {
   userId: string;
   numtrials: number;
 }
@@ -17,4 +17,5 @@ const userSchema = new mongoose.Schema<IUser>({
 },
   { timestamps: true }
 );
-export const userLimit: mongoose.Model<IUser> = mongoose.models["userlimits"]? mongoose.model("userlimits"): mongoose.model("userlimits", userSchema);
+export const userLimit = mongoose.models['userlimits'] || mongoose.model<IUser>('userlimits', userSchema);
+// export const : mongoose.Model<IUser> = mongoose.models["userlimits"]? mongoose.model("userlimits"): mongoose.model("userlimits", userSchema);

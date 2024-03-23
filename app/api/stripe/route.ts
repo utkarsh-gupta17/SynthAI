@@ -4,6 +4,8 @@ import { absoluteUrl } from "@/lib/utils";
 import { auth, currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/connDB";
+import { isDynamicServerError } from "next/dist/client/components/hooks-server-context";
+
 
 async function connectWithDB(){
   await connectDB();
@@ -64,6 +66,9 @@ export async function GET(){
 
     return new NextResponse(JSON.stringify({ url: stripeSession.url }));
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     console.log("[STRIPE_ERROR]",error);
     return new NextResponse("Internal Error",{ status:500 });
   }
