@@ -17,10 +17,4 @@ const userSchema = new mongoose.Schema<IUser>({
 },
   { timestamps: true }
 );
-
-// try {
-//   export  = mongoose.model()
-// } catch (error) {
-//   export userLimit: mongoose.Model<IUser> = mongoose.model("userlimits", )
-// }
-export const userLimit: mongoose.Model<IUser> = mongoose.models["userlimits"]? mongoose.model("userlimits"): mongoose.model("userlimits", userSchema)
+export const userLimit: mongoose.Model<IUser> = mongoose.models["userlimits"]? mongoose.model("userlimits"): mongoose.model("userlimits", userSchema);
